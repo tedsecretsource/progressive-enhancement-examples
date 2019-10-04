@@ -10,10 +10,4 @@ body
 }
 #backgrounder {
 	font-size: 2rem;
-	background-color: darkblue;
-	display: block;
-	width: 20rem;
-	padding: 1.25rem;
-	color: white;
-	text-align: center;
 }
