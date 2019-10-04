@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>White Text on a Colorful Background</title>
+	<meta name="generator" content="BBEdit 13.0" />
+	<style>
+	body
+	{
+		color: white;
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 1rem;
+		background-color: darkblue;
+		background-image: url('https://picsum.photos/200/?blur=10');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	#backgrounder {
+		font-size: 2rem;
+		background-color: darkblue;
+		display: block;
+		width: 20rem;
+		padding: 1.25rem;
+		color: white;
+		text-align: center;
+	}
+	</style>
+	<script>
+		let updateBackground = function() {
+			let randomNumber = Math.random(1, 100000);
+			let newImageURL = 'https://picsum.photos/seed/' + randomNumber + '/200?blur=10';
+			let picsum = {
+				url: 'https://picsum.photos/1024?blur=10'
+			};
+			let bground = document.querySelector('body').style;
+			bground.backgroundSize = 'cover';
+			bground.backgroundImage = 'url(' + newImageURL + ')';
+			bground.backgroundPosition = 'center';
+			bground.backgroundRepeat = 'no-repeat';
+		}
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			let button = document.querySelector('#backgrounder');
+			button.addEventListener('click', function() {
+				updateBackground();
+			});
+		});
+	</script>
+</head>
+<body>
+	<p><a href="" id="backgrounder">Change Background</a></p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed risus sed turpis lobortis consectetur et malesuada dui. Integer tincidunt sodales sem sed blandit. Etiam porta sit amet felis vel iaculis. Integer euismod placerat sapien, quis vehicula tellus vehicula sit amet. Nam ac metus velit. Phasellus aliquet nulla et tortor finibus, at varius quam ultrices. Fusce rutrum ut arcu eu faucibus. Duis commodo, nisl eget sodales ornare, erat sem eleifend eros, at tempor lectus lacus a justo. Aenean et ullamcorper nisi, sit amet rutrum velit. Curabitur vitae elit enim. Nam ultrices consequat blandit. Integer sit amet venenatis lacus. Nullam venenatis venenatis ligula, sed rhoncus augue suscipit non. Cras vel leo ut sem aliquam gravida non non purus.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed risus sed turpis lobortis consectetur et malesuada dui. Integer tincidunt sodales sem sed blandit. Etiam porta sit amet felis vel iaculis. Integer euismod placerat sapien, quis vehicula tellus vehicula sit amet. Nam ac metus velit. Phasellus aliquet nulla et tortor finibus, at varius quam ultrices. Fusce rutrum ut arcu eu faucibus. Duis commodo, nisl eget sodales ornare, erat sem eleifend eros, at tempor lectus lacus a justo. Aenean et ullamcorper nisi, sit amet rutrum velit. Curabitur vitae elit enim. Nam ultrices consequat blandit. Integer sit amet venenatis lacus. Nullam venenatis venenatis ligula, sed rhoncus augue suscipit non. Cras vel leo ut sem aliquam gravida non non purus.</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed risus sed turpis lobortis consectetur et malesuada dui. Integer tincidunt sodales sem sed blandit. Etiam porta sit amet felis vel iaculis. Integer euismod placerat sapien, quis vehicula tellus vehicula sit amet. Nam ac metus velit. Phasellus aliquet nulla et tortor finibus, at varius quam ultrices. Fusce rutrum ut arcu eu faucibus. Duis commodo, nisl eget sodales ornare, erat sem eleifend eros, at tempor lectus lacus a justo. Aenean et ullamcorper nisi, sit amet rutrum velit. Curabitur vitae elit enim. Nam ultrices consequat blandit. Integer sit amet venenatis lacus. Nullam venenatis venenatis ligula, sed rhoncus augue suscipit non. Cras vel leo ut sem aliquam gravida non non purus.</p>
+	<p><a href="wrong.html">Do it wrong!</a>
+</body>
+</html>

@@ -8,11 +8,39 @@ degredation makes sense to them but not PE.
 
 The examples you'll find here include:
 
+- [Legible Text](#legible-text)
 - [Display a modal](#display-a-modal)
 - [Display the main menu at the top of the screen instead of the bottom](#main-menu-at-top-of-page)
 - [Using JavaScript to reduce network size when submitting a form](#ajaxify-a-form)
 - [Add a Print Page button to a receipt or reservation confirmation](#add-a-print-page-button)
 - [Using JS to provide an image preview prior to uploading](#enhance-image-upload-with-preview)
+
+## But What is It?
+
+For me, PE starts with the most basic presentation imaginable. Developers
+then "enhance" the presentation such that should an enhancment fail, for
+whatever reason, the basic presentaiton is still available and the reason
+the user came to the site is not invalidated.
+
+## But PE is More Expensive
+
+*Only if you do it as an afterthought*, in most cases. Think
+about it: even in today's "modern" world, the majority of what we're
+doing with React is presenting data, sometimes with a UI that makes
+consumption of that data easier. And how does React do this? It _tricks_
+the browser into thinking it is looking at an H1, or a P, or a FOOTER
+element. In other words, in memory, it recreates the very HTML that
+many believe we can dispose of. Why not just display the damn HTML?!
+
+This first example demonstrates a right way, and a wrong way, to follow
+the principles of PE.
+
+## Legible Text
+
+In this example, a web page has a large amount of white text on it and
+a colorful background, much like the desktop of a computer. Done as an
+afterthought, PE will be shown to require more time. Done first, it will
+be evident it is the right way to do things.
 
 ## Display a Modal
 
