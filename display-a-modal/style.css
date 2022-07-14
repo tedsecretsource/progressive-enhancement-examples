@@ -1,0 +1,7 @@
+li {
+	list-style-type: none;
+}
+
+.gwt li {
+	list-style-type: disc;
+}
