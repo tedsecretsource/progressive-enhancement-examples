@@ -1,11 +1,11 @@
-# Progressive Enhancement Patterns and Examples
+# [Progressive Enhancement Patterns and Examples](https://tedsecretsource.github.io/progressive-enhancement-examples/)
 
 ## Introduction
 
-I have been a strong proponent of employing [progressive
-enhancement (PE)](https://en.wikipedia.org/wiki/Progressive_enhancement) best
-practices ever since I was introduced to feature detection in JavaScript
-in Danny Goodman's JavaScript Bible in the late 90s (although, back then
+I have been a strong proponent of following [progressive
+enhancement (PE)](https://en.wikipedia.org/wiki/Progressive_enhancement) 
+practices ever since I was introduced to [feature detection](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection) in JavaScript
+in [Danny Goodman's JavaScript Bible](https://www.amazon.com/JavaScript-Examples-Bible-Essential-Companion/dp/0764548557 "This is not an affiliate link!") in the late 90s (although, back then
 the term hadn't been coined quite yet).
 
 These are the reasons why everyone should be employing PE best practices.
@@ -14,14 +14,15 @@ These are the reasons why everyone should be employing PE best practices.
 following one.
 - By following a PE approach, costs will go down in the long run
 because the software is more resilient and requires less maintenance.
-- If it takes more time, you're doing it in the wrong order (graceful
-degredation, or just trying to patch a thoroughly broken system)
+- If it takes more time, you're doing it in the wrong order ([graceful
+degredation](https://developer.mozilla.org/en-US/docs/Glossary/Graceful_degradation),
+or just trying to patch a thoroughly broken system)
 
 ## Patterns
 
 There are two main PE patterns:
 
-- Intercept an event to reduce latency (lightbox, ajax form)
+- Intercept an event with JavaScript to reduce latency (lightbox, ajax form)
 - Leverage CSS to reduce DOM nodes / render latency (font formatting, 
 CSS Grid) and enhance visual comprehension (not just legibility)
 
@@ -30,84 +31,46 @@ CSS Grid) and enhance visual comprehension (not just legibility)
 These are just a couple of smells that I use to spot code that hasn't
 followed PE best practices.
 
-- The abscense of a fallback when JavaScript isn't available
+- The abscense of a (functioning) fallback when JavaScript isn't available 
+(broken forms)
 - Inaccessible or missing content when JS or CSS isn't available
 
-## PE in the real world
+## Progressive Enhancement in Practice - A practical view
 
-Every now and then I [turn off JS and 
-CSS](https://chrome.google.com/webstore/detail/disable-html/lfhjgihpknekohffabeddfkmoiklonhm?hl=en) 
-and surf the web just to see what the experience can be like and remind
-myself of the importance of providing easily consumable content. The
-following big players provide usable fallbacks for their sites. In most
-cases it seems to be that they were aware of these principles when they
-built their sites:
+Login forms require a visit to the server. No one would consider using
+*only* JavaScript to authenticate users. Login forms often verify field
+values before executing the authentication function: there must be a
+username and a password. These fields cannot be blank and processing
+forms with missing data is a waste of time and energy.
 
-- twitter.com (my personal favorite as the experience is nearly 
-identical)
-- facebook.com
-- cnn.com
-- bbc.co.uk (most news sites in general)
-- stackoverflow.com
-- wired.com
-- news.ycombinator.com (no surprise there)
-- reddit
-- github.com
-- probably _all_ e-commerce web sites, especially amazon.com
-- many, many more — you get the idea
+It is also a common practice to add JavaScript, or even HTML attributes,
+on the client to make sure the form isn't submitted without required
+values.
 
-These sites do not provide any kind of experience without JavaScript:
-
-- instagram.com
-- linkedin.com
-- google.com/maps/ (although it does have a funny no JS message)
-- bitbucket.org (major fail if you ask me)
-
-While doing this research, I noticed that netflix.com sort of works
-without JavaScript but the first step in signing up seems to be a
-JavaScript link when it could just as well have been a button and a
-form. Oops!
-
-## PE in Practice - A practical view
-
-Everyone knows login forms require a visit to the server. No one would
-even consider using JavaScript to authenticate users due to the
-likelihood of the site being hacked. Likewise, login forms often verify
-field values before executing the authentication function: there must be
-a username and a password. These fields cannot be blank. Processing 
-forms with empty fields is a waste of time and energy and opens a door
-for potential abuse.
-
-It is also common practice to add JavaScript, or even HTML attributes on
-the client to make sure the form isn't submitted without some value in
-the username and password fields. This is done for two reasons: 1) it is
-a waste of server resources to process a login form with no data and,
-more importantly, 2) the user experience is so much better when this
-kind of validation happens on the client.
-
-This is an industry standard of PE because it "enhances" the end user
-experience with no loss of critical functionality should the JavaScript
-fail to work. Note that the first step in implementing this
-functionality is always going to be getting the basic form working (and
-testing it requires testing _without_ JavaScript).
+Adding JavaScript to do client-side validation (or HTML attributes to
+require values) is a common example of progressive enhancement because
+it improves the end user experience with no loss of critical
+functionality under adverse conditions (because you still have to
+validate the input on the server prior to running the authentication
+function - it will always work).
 
 But what about a form to add a picture to your social network feed? What
-would it look like to do this in a PE way? Before we answer, let's look
-at what it would look like to do it in a non-PE way…
+would it look like to do this in a progressively enhanced way? Before we
+answer, let's look at what it would look like to do it in a
+non-progressively-enhanced way…
 
-Assuming we're using React, we would probably create a component
-consisting of a FORM element and the inputs necessary to allow giving
-the image a title and description and a FILE input for uploading the 
-actual file. We might then have to assign a className to one or more of
-the elements to tell React how to display them and assign a handler for
-the form submission. At this point we'd have to write the form handler
-which would include validating the input for obvious reasons and then
-some server-side code to handle the upload and produce a response that
-React will know how to handle (the response handler).
+Assuming we're using React, we would create a component consisting of a
+FORM element and the inputs necessary to allow giving the image a title
+and description and a FILE input for uploading the actual file. We would
+then need to assign a handler for the form submission and wire up all
+the inputs so they are not "unbound". The form handler would also
+include validating the input. Finally, we would have to implement
+server-side code to handle the upload and produce a response that React
+will know how to handle (the response handler).
 
 So, to summarize, the steps would be:
 
-1. Write a form in HTML
+1. Write a form as React components (all JavaScript)
 2. Style the form with CSS
 3. Write a handler in JavaScript that sends the form to the server
 4. Write another handler in JavaScript that processes the server response
@@ -125,78 +88,48 @@ would be:
 
 Five steps vs. three steps.
 
-Let that sink in for a moment.
+**More work to end up with code that is more fragile**
 
-**More work to end up with code that is more fragile!**
+The only exception here is that, perhaps, React can handle error
+conditions more elegantly, but you still have to code and plan for them!
 
-## But, but… React is Just so Cool!
+## Progressive Enhancement in the real world
 
-And I agree, actually, and hope is not lost, at all. If you're willing
-to put in the extra work to do it in React, why not just do it in a PE
-manner for the same amount of effort? We have two steps we can use to 
-progressively enhance the experience. Let's start with step 3:
+Every now and then I [turn off JS and
+CSS](https://chrome.google.com/webstore/detail/disable-html/lfhjgihpknekohffabeddfkmoiklonhm?hl=en) and surf the web just to see
+what the experience can be like and remind myself of the importance of
+providing easily consumable content. The following big players provide
+usable fallbacks for their sites. In most cases it seems to be that they
+were aware of these principles when they built their sites, but that's
+probably wishful thinking. In reality I suspect that these sites were
+first built when JavaScript _wasn't_ a given and they simply haven't
+updated the sites since then.
 
-Just like in the non-PE version, we're going to write a handler that
-sends the request and handles the response (normally, show the result
-of the operation).
+- ~~[twitter.com](https://twitter.com) (my personal favorite as the experience is nearly 
+identical)~~ Twitter has since started requiring JS!
+- facebook.com
+- cnn.com
+- bbc.co.uk (most news sites in general)
+- stackoverflow.com
+- wired.com
+- news.ycombinator.com (no surprise there)
+- reddit
+- [github.com](https://github.com): many features work perfectly without JS and even without CSS
+- probably _all_ e-commerce web sites, especially amazon.com
+- many, many more — you get the idea
 
-```js
-let theForm = document.querySelector('#theform');
-theForm.addEventHandler('submit', function(event) {
-	event.preventDefault();
-	// serialize the data, maybe
-	// handle file uploads
-	// add a "processing" spinner to let the user know something is
-	// happening
-	// submit the form and Bob's your uncle, mostly
-});
-```
+These sites do not provide any kind of experience without JavaScript:
 
-Before going any further, please note that *the response from the server
-has already been written* and can be used _as is_ with **no** additional
-_server-side_ work if we so choose. Just by handling the form submission
-via ajax we are already significantly cutting down on the request time
-and thus, the entire request/response time. Modifying the response on
-the server will also decrease it significantly but it is OPTIONAL, so we
-won't do it _for now_.
+- instagram.com
+- linkedin.com
+- twitter.com
+- google.com/maps/ (although it does have a funny no JS message)
+- bitbucket.org (major fail if you ask me, but what would you expect from the makers of Jira?)
 
-But we still need to handle the response. We still need to determine if
-the form was accepted by the HTTP server and what the application 
-response was (either the image was added or failure, the image was not 
-added).
-
-### Handling the Response - Our Step 5
-
-`successPromise()` is a function that is executed whenever the server
-responds with anything other than an error, typically when the response
-is 200, 201, or maybe even 302. It does not mean the image was added to
-the profile (this is not the application response, normally, but the
-HTTP server response code). We still need to inspect the body of the 
-response to determine if the image was added or not. Normally, the body
-will contain some kind of success message that you know, because you
-wrote it.
-
-If the application response is not success, like, maybe the user only 
-entered periods in the image title and our client-side validation did
-not take that possibility into account, then we need to redisplay the
-form with the submitted data and an error message. Since we have all of
-this data (both in the request that we sent and the response we 
-received), then we just update the display accordingly.
-
-If the application response _is_ success, then, in a case such as this,
-we can either window.location.href redirect the user to the new image
-details page or notify the user that the image was added, clear the form
-and let them add another, or something similar. The possibilities are
-endless but the point I'm trying to make is that how you choose to 
-hanlde the response does not mean more work just because you are
-following PE principles.
-
-`failurePromise()` is a function that runs when the server responds with
-HTTP codes other than 200, 201, and maybe 302. In this instance, we 
-notify the user that there was an unknown error and that they should 
-give up.
-
-Just kidding… but you get the idea.
+While doing this research, I noticed that netflix.com sort of works
+without JavaScript but the first step in sign up seems to be a
+JavaScript link when it could just as well have been a button and a
+form.
 
 ## Summing Up
 
@@ -216,9 +149,10 @@ right. React will not let you deploy code with syntax errors. But let's
 say it wasn't a syntax error, but simply a network failure, or a
 misconfigured server failure, or the user went into a tunnel on the 
 train and the request timed out interrupting the response for the
-JavaScript. What then?
+JavaScript. Or, maybe, a misspelled variable leads to an unpredictable
+condition and the whole thing falls over. What then?
 
-## Coda
+## Resources
 
 What follows are links to repositories that demonstrate different types
 of progressive enhancement. The goal is to give you patterns you can
@@ -240,11 +174,16 @@ The examples you'll find here include:
 - [Add a Print Page button to a receipt or reservation confirmation](#add-a-print-page-button)
 - [Using JS to provide an image preview prior to uploading](#enhance-image-upload-with-preview)
 
-## Legible Text
+## [Always Legible Text](https://tedsecretsource.github.io/progressive-enhancement-examples/white-text-colorful-background)
 
-In this very basic example, a web page has a large amount of white text 
-on it and a colorful background, much like the desktop of a computer.
+It is often a challenge to guarantee text is always legible (large
+enough, sufficient contrast between text color and background color). In
+this very basic example, a web page has a large amount of white text on
+it and a colorful background, much like the desktop of a computer.
 Clicking a button on the page changes the background to another picture.
+Regardless of whether or not CSS and JS are enabled, the text should
+always be legible.
+
 Done as an afterthought, PE will be shown to require more time. Done
 first, it will be evident it is the right way to do things.
 
@@ -323,3 +262,19 @@ This example comes from this description of [Progressive Enhancement vs.
 Graceful Degredation](https://www.w3.org/community/webed/wiki/Graceful_degredation_versus_progressive_enhancement)
 
 ## Enhance Image Upload with Preview
+
+# Why Do I Care?
+
+For me, this is all an exercise in critical thinking. All one needs to do is look at the past to find plenty of examples of "the next big thing" that turned out to be the exact opposite: Adobe Flash, Java Applets, Google Wave, Chromebooks…
+
+Being a web developer requires us to examine our choices closely. If you can make content and functionality accessible under extreme circumstances at no additional cost, why wouldn't you?
+
+I've received my share of disdain for insisting on progressive enhancement but the bottom line is, _how_ you do something is rarely the principal criteria we use to judge quality. I am responsible for quality. If you can write an equally quality web app that does not follow PE principles, then I have no qualms, no complaints.
+
+It's important to remember that disabling JS, CSS, and throttling your network are only _simulations_ of the types of things that can go wrong and *not* intended to represent any de facto reality. They are things we do to test potential failures, nothing more.
+
+# Resources (in no particular order)
+
+- https://www.youtube.com/watch?v=-yIbKaA3wCo (perhaps my favorite explanation of PE)
+- https://kryogenix.org/code/browser/everyonehasjs.html
+- https://nolanlawson.com/2016/10/13/progressive-enhancement-isnt-dead-but-it-smells-funny/

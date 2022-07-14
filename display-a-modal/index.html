@@ -11,9 +11,29 @@
 		<h1>Images Database</h1>
 		<p>This page demonstrates how to progressively enhance going from 
 		an index page to a detail page. Specifically, instead of leading
-		the user to another page, clicing the image link below will open
+		the user to another page, clicking the image link below will open
 		a modal with the enlargement inside. Clicking outside the enlargement 
 		or on the X closes the enlargement.</p>
+		<p>
+			Expressed in terms of acceptance criteria:
+			<ul>
+				<li>
+					Given the photograph is visible as a thumbnail on the index page,<br>
+					When the user clicks on the thumbnail<br>
+					Then the photograph is enlarged in a modal
+				</li>
+				<li>
+					Given the photograph is enlarged in a modal,<br>
+					When the user clicks outside the modal<br>
+					Then the modal is closed
+				</li>
+				<li>
+					Given the photograph is enlarged in a modal,<br>
+					When the user clicks on the X<br>
+					Then the modal is closed
+				</li>
+			</ul>
+		</p>
 		<ul>
 			<li>
 				<a class=""
@@ -21,7 +41,7 @@
 					id="link_detail"
 					title="Falling Water by Frank Lloyd Wright"
 				>
-					<img src="images/Fallingwater_from_bridge-256x132.jpg" alt="Falling Water by Frank Lloyd Wright">
+					<img src="images/Fallingwater_from_bridge-256x132.jpg" alt="Photograph of the outside of the Falling Water building by Frank Lloyd Wright with a few people on the balconies">
 				</a>
 			</li>
 		</ul>
